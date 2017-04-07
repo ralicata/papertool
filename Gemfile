@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.0.rc1'
-gem 'sqlite3'
+gem 'pg'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', github: "rails/sass-rails"
 gem 'uglifier', '>= 1.3.0'
