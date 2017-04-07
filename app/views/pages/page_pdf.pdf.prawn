@@ -7,14 +7,14 @@ prawn_document do |pdf|
    #pdf.move_down 5.mm
   end
 
-  k = pdf.bounds.top
-  a = 40
-  b = ( (k - 5.mm ) /  5.mm).to_i
+  k = pdf.bounds.top                    # margin top
+  columns = (567 / 5.mm ).to_i          # number of columns
+  rows = ((k - 5.mm ) /  5.mm).to_i     # number of rows
 
   pdf.stroke_color 'eeeeee'
-  (0..b).each do |i|
-    if i < a
-      pdf.line(i * 5.mm, k - b * 5.mm,i * 5.mm,k)
+  (0..rows).each do |i|
+    if i < columns
+      pdf.line(i * 5.mm, k - rows * 5.mm,i * 5.mm,k)
     end
     pdf.stroke_horizontal_rule
     pdf.move_down 5.mm
@@ -25,7 +25,7 @@ prawn_document do |pdf|
   pdf.bounding_box [pdf.bounds.left, pdf.bounds.bottom + 15], :width  => pdf.bounds.width do
       pdf.stroke_horizontal_rule
       pdf.move_down(5)
-      pdf.text 'PaperTool by Roberto Alicata', :color => "dddddd", :size => 8
+      pdf.text 'PaperTool 2017 by Roberto Alicata', :color => "cccccc", :size => 8
   end
 
 
