@@ -7,18 +7,28 @@ prawn_document do |pdf|
    #pdf.move_down 5.mm
   end
 
+  sq = @square_size
+
   k = pdf.bounds.top                    # margin top
-  columns = (567 / 5.mm ).to_i          # number of columns
-  rows = ((k - 5.mm ) /  5.mm).to_i     # number of rows
+  columns = (570 / sq.mm ).floor          # number of columns
+  rows = (k / sq.mm).floor    # number of rows
+
+  #pdf.text "#{rows} - #{columns}"
+
 
   pdf.stroke_color 'eeeeee'
-  (0..rows).each do |i|
-    if i < columns
-      pdf.line(i * 5.mm, k - rows * 5.mm,i * 5.mm,k)
+  (1..rows).each do |i|
+    if i <= columns
+      pdf.line((i-1) * sq.mm, sq.mm, (i-1) * sq.mm, sq.mm * rows)
+    #  pdf.line(i * sq.mm, k - (rows * sq.mm), i * sq.mm, k)
     end
-    pdf.stroke_horizontal_rule
-    pdf.move_down 5.mm
+
+    pdf.line(0, i * sq.mm, (columns - 1 ) * sq.mm, i * sq.mm)
+    #pdf.stroke_horizontal_rule
+    #pdf.move_down sq.mm
   end
+
+
 
 
 
