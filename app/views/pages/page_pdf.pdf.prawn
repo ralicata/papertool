@@ -8,12 +8,13 @@ prawn_document do |pdf|
   end
 
   sq = @square_size
-  k = pdf.bounds.top - 40                    # margin top
+  k = pdf.bounds.top - 45                    # margin top
   columns = ((pdf.bounds.width) / sq.mm ).floor + 1        # number of columns
   rows = (k / sq.mm).floor               # number of rows
   pdf.text  @header_h1, :color => "aaaaaa", :size => 12
-  pdf.move_down(4)
+  pdf.move_down(1)
   pdf.text  @header_body, :color => "cccccc", :size => 8
+
   pdf.bounding_box [pdf.bounds.left, pdf.bounds.bottom + 20], :width  => pdf.bounds.width do
     pdf.stroke_color 'eeeeee'
     (1..rows).each do |i|
@@ -27,8 +28,8 @@ prawn_document do |pdf|
         pdf.line(0, i  * sq.mm, (columns - 1 ) * sq.mm, i * sq.mm)
       else
         (1..columns).each do |j|
-          pdf.stroke_color '000000'
-          pdf.circle( [( j-1) * sq.mm, (i  + 1) * sq.mm], 0.4)
+          pdf.stroke_color '555555'
+          pdf.circle( [( j-1) * sq.mm, (i) * sq.mm], 0.4)
         end
       end
 
@@ -37,12 +38,14 @@ prawn_document do |pdf|
 
 
 
-  pdf.bounding_box [pdf.bounds.left, pdf.bounds.bottom + 16], :width  => pdf.bounds.width do
+  pdf.bounding_box [pdf.bounds.left, pdf.bounds.bottom + 20], :width  => pdf.bounds.width do
       pdf.move_down(4)
       #pdf.stroke_color 'eeeeee'
       #pdf.stroke_horizontal_rule
-      pdf.move_down(4)
+      #pdf.move_down(4)
       pdf.text "PaperTool 2017 by Roberto Alicata - #{@name}", :color => "cccccc", :size => 8
+      pdf.text "papertool.herokuapp.com", :color => "cccccc", :size => 6
+
   end
 
 pdf.stroke
