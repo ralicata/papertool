@@ -13,9 +13,20 @@
           Home
           %span.sr-only (current)
       %li.nav-item
-        %a.nav-link{ :href => "/pages/page_pdf.pdf" } 5mm square
+        %a.nav-link{ :href => "/pages/page_pdf.pdf?sq=5" } 5mm squares
       %li.nav-item
-        %a.nav-link.disabled{ :href => "#" } Disabled
-    %form.form-inline.my-2.my-lg-0
-      %input.form-control.mr-sm-2{ :placeholder => "Search", :type => "text" }/
-      %button.btn.btn-outline-success.my-2.my-sm-0{ :type => "submit" } Search
+        %a.nav-link{ :href => "/pages/page_pdf.pdf?sq=10" } 10mm squares
+      %li.nav-item
+        %a.nav-link{ :href => "/pages/page_pdf.pdf?sq=5&tp=dots" } 5mm dots
+      %li.nav-item
+        %a.nav-link{ :href => "/pages/page_pdf.pdf?sq=10&tp=dots" } 10mm dots
+.container.form-size
+  .row.justify-content-center
+    .col-md-6
+      %h1 Generate printable paper
+      %br/
+      = form_tag(pages_page_pdf_path, class: "form-inline my-2 my-lg-0") do
+        = select_tag 'tp', raw('<option>squares</option><option>lines</option><option>dots</option>'), class: "form-control"
+        = text_field_tag 'sq', nil, class: "form-control mr-sm-2", placeholder: "Enter mm"
+        = hidden_field_tag :format, :pdf
+        %button.btn.btn-outline-success.my-2.my-sm-0{ :type => "submit" } Go
